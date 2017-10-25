@@ -1,0 +1,32 @@
+wifi настройка:
+sudo su
+iwlist wlan0 scan - просканировать сеть
+Увидили свою сеть ESSID:"WiFiName"
+wpa_passphrase WiFiName 1234567890 > /etc/wpa_supplicant/wpa_supplicant.conf
+Теперь дописываем сверху в файле wpa_supplicant.conf следующее:
+country=RU
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+Готово, выполняем команды:
+wpa_supplicant -B -Dwext -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf
+dhclient wlan0
+Перезагружаемся, wifi должен подхватываться автоматически.
+
+yota настройка:
+sudo su
+Создаем файл:
+nano /etc/init.d/local.autostart
+Прописываем bash скрипт:
+#!/bin/bash
+sudo iptables -t mangle -A POSTROUTING -j TTL --ttl-set 128
+Ставим право выполнения:
+chmod +x /etc/init.d/local.autostart
+Ставим в автозагрузку:
+update-rc.d local.autostart defaults 80
+
+ssh настройка:
+sudo su
+raspi-config
+Далее включить ssh server
+Узнать ip адрес командой: hostname -I
+Подключиться: ssh pi@(ip адрес)
