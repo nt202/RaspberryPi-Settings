@@ -1,0 +1,7 @@
+virtual box 5.2 i386 с оф. сайта
+
+sudo apt-get insttall dkms
+sudo apt-get insttall virtualbox-dkms
+sudo /etc/init.d/virtualbox start
+
+genymotion-xxx.bin положить в папку Programs и запустить
