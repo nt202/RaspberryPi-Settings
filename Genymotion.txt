@@ -1,0 +1,1 @@
+Чтобы установить virtualbox-dkms нужно в биос убрать security boot и/или uefi
